@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Auto-resize the textarea height
         autoResize();
-    });
+    }); 
     descriptionInput.addEventListener('input', function() {
         descriptionInput.style.height = 'auto';  // Reset the height
         descriptionInput.style.height = descriptionInput.scrollHeight + 'px';  // Set the height based on content
