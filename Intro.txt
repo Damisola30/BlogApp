@@ -1,0 +1,13 @@
+AIM: Python Mastery and Web Frameworks (Django/Flask)
+
+Project: Building a Blog Application
+
+Skills Covered/ Required: Python, Django/Flask, ORM, Security Best Practices.
+
+Description: Create a blog application where users can sign up, log in, create, edit, and delete blog posts. Include features like categories, tags, and comments.
+
+What I'll Learn at the end:
+    - Use Python with Django or Flask to build a full-featured web application.
+    - Implement authentication and user sessions.
+    - Apply ORM to interact with a database for CRUD (Create, Read, Update, Delete) operations.
+    - Practice security measures such as password hashing and form validation.

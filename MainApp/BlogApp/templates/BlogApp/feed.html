@@ -1,0 +1,6 @@
+{% extends "BlogApp/base.html"%}
+{% block content %}
+{% for post in posts %}
+<a href="" class="link">{{post.Category}}</a>
+{% endfor%}
+{% endblock%}
