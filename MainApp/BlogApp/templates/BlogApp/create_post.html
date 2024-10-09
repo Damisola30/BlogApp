@@ -48,12 +48,13 @@
             <!-- {% if form.description.errors %}
             <div class="error" style="color: orange;"> </div>
         {% endif %} -->
+        
           <form  method="post" id="stripe-login">
             {% load widget_tweaks %}
             {% csrf_token %}
 
             <div class="tweet-box">
-                <a href=""><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="{% url 'feed' %}"><i class="fa-solid fa-xmark"></i></a>
                 <!-- Hidden div for styling hashtags -->
                     <div class="styled-text" id="styledText"></div>
                     {{form.description|attr:"class:tweet-input"}}
@@ -64,7 +65,7 @@
                             <span id="charCount">0</span>/280
                         </div>
                         
-                        
+
                         <button type="submit" id="tweetButton" disabled>Post</button>
                     </div>
                 </div>

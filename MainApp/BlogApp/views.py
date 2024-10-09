@@ -56,14 +56,27 @@ def feed(request):
 
 
 def create_post(request):
-    if request.method == 'post':
+    if request.method == "POST":
         print ("form submitted successfully")
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect ('home')
+
+             # Extract words starting with # from the description
+            description = form.cleaned_data['description']
+            hashtags = re.findall(r'#(\w+)', description)
+
+            # Add the extracted tags to the post
+            for tag_name in hashtags:
+                tag, created = Tag.objects.get_or_create(name=tag_name)
+                post.tags.add(tag)
+
+            post.save()
+            
+        
+            return redirect ('feed')
     else:
         print("unseccessfull")
         form = PostForm()
