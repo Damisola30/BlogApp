@@ -6,7 +6,7 @@ from .models import Comment, Post, Tag, Category
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    Dp = forms.ImageField()
+    Dp = forms.ImageField(required= True)
 
 
     class Meta :
@@ -17,4 +17,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model =Post
-        fields = [ "description"]
+        fields = [ "description","Category"]
+        widgets = {
+            "Category": forms.CheckboxSelectMultiple(),
+        }

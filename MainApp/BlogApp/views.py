@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.urls import reverse
 from .forms import RegisterForm
 from .forms import PostForm
-from .models import Post, Tag 
+from .models import Post, Tag, Category
 import re
 
 # Create your views here.
@@ -42,8 +42,9 @@ def user_login(request):
                 messages.success(request, f'welcome {username}, you have successfully registered!')
                 return redirect(reverse('feed'))
             else:
+                print("error")
                 # Handle form errors during registration
-                return render(request, 'registration/login.html', {'form': form})
+                return render(request, 'registration/login.html', {'form': form,})
 
     else:
         form = RegisterForm()  # Initialize an empty form for registration
@@ -52,7 +53,12 @@ def user_login(request):
 
 
 def feed(request):
-    return render(request,'BlogApp/feed.html')
+    post = Post.objects.all()
+    categories = Category.objects.all()
+    return render(request,'BlogApp/feed.html', {
+        'post': post,
+        'categories': categories
+        })
 
 
 def create_post(request):
@@ -81,3 +87,7 @@ def create_post(request):
         print("unseccessfull")
         form = PostForm()
     return render(request,"BlogApp/create_post.html", {"form": form})
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('login'))

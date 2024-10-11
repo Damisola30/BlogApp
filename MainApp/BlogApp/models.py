@@ -18,6 +18,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete =models.CASCADE)
+    Dp = models.ImageField(upload_to='media/',default="defaultdp.jpeg ")
     description = models.TextField(max_length=280, null = True)
     tags = models.ManyToManyField(Tag, related_name='posts')    
     created_at = models.DateTimeField(auto_now_add=True)
@@ -25,7 +26,7 @@ class Post(models.Model):
     Category = models.ManyToManyField(Category, related_name='posts')
 
     def __str__(self):
-        return self.title +"\n" + self.description
+        return f"{self.author.id} \n  {self.description}"
 
 
 class Comment(models.Model):

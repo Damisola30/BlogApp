@@ -1,0 +1,94 @@
+[
+    {
+       "model": "BlogApp.Category",
+       "pk": 1,
+       "fields": {
+          "name": "Technology"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 2,
+       "fields": {
+          "name": "Health"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 3,
+       "fields": {
+          "name": "Education"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 4,
+       "fields": {
+          "name": "Travel"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 5,
+       "fields": {
+          "name": "Finance"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 6,
+       "fields": {
+          "name": "Lifestyle"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 7,
+       "fields": {
+          "name": "Entertainment"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 8,
+       "fields": {
+          "name": "Sports"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 9,
+       "fields": {
+          "name": "Business"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 10,
+       "fields": {
+          "name": "Food"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 11,
+       "fields": {
+          "name": "Art"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 12,
+       "fields": {
+          "name": "Science"
+       }
+    },
+    {
+       "model": "BlogApp.Category",
+       "pk": 13,
+       "fields": {
+          "name": "Fashion"
+       }
+    }
+ ]
+ 

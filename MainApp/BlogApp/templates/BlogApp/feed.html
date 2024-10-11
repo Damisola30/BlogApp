@@ -1,6 +1,33 @@
 {% extends "BlogApp/base.html"%}
 {% block content %}
-{% for post in posts %}
-<a href="" class="link">{{post.Category}}</a>
-{% endfor%}
+<div class="feed-page">
+    <div class="category-container">
+        <div class="category-bar">
+            {% for categories in categories %}
+            <button type="button" class="btn btn-light">
+                <span class="badge ">{{categories.name}}</span>
+            </button>
+            {% endfor %} 
+        </div>  
+    </div>
+
+    <div class="feed-container">
+        <h3>Feed </h3>
+        {% for post in post %}
+            <div class="card ">
+                <div class="card-header">
+                    <img src="{{post.Dp.url}}" class="profile-pic" alt="...">
+                    {{post.author.username}}
+                </div>
+                <div class="card-body">
+                <!-- <h5 class="card-title">Primary card title</h5> -->
+                <p class="card-text">{{post.description}}</p>
+                </div>
+                <div class="card-footer">
+                    <p>updated_at</p>{{post.updated_at}}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock%}

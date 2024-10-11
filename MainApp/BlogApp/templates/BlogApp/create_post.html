@@ -60,6 +60,14 @@
                     {{form.description|attr:"class:tweet-input"}}
                    
                     <hr>
+                    <div class="category-bar">
+                      {% for checkbox in form.Category %}
+                          <label class="category-btn">
+                              {{ checkbox.tag }}  <!-- This renders the checkbox -->
+                              {{ checkbox.choice_label }}  <!-- This renders the category name -->
+                          </label>
+                      {% endfor %}
+                  </div>
                     <div class="tweet-footer">
                         <div class="counter">
                             <span id="charCount">0</span>/280
