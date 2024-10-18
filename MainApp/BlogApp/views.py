@@ -33,23 +33,24 @@ def user_login(request):
                 error_message = "Invalid username or password."
                 return render(request, 'registration/login.html', {'error_message': error_message})
 
-        elif form_type == "sign_up":
-            username = request.POST.get('username')
+        elif form_type == "Register":
             form = RegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
-                login(request, user)  # Log the user in after registration
+                username = user.username
                 messages.success(request, f'welcome {username}, you have successfully registered!')
-                return redirect(reverse('feed'))
+                login(request, user)  
+                return redirect('feed')
             else:
-                print("error")
-                # Handle form errors during registration
-                return render(request, 'registration/login.html', {'form': form,})
+                form = RegisterForm()
+                messages.error(request, 'There was an error with your registration. Please try again.')
+               
 
     else:
-        form = RegisterForm()  # Initialize an empty form for registration
-
+        form = RegisterForm()
     return render(request, 'registration/login.html', {'form': form})
+
+    
 
 
 def feed(request):
@@ -63,28 +64,28 @@ def feed(request):
 
 def create_post(request):
     if request.method == "POST":
-        print ("form submitted successfully")
+        
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.save()
-
-             # Extract words starting with # from the description
+            post.save() 
+            # Extracting tag's from the description
             description = form.cleaned_data['description']
             hashtags = re.findall(r'#(\w+)', description)
-
-            # Add the extracted tags to the post
+            # Adding the tags
             for tag_name in hashtags:
                 tag, created = Tag.objects.get_or_create(name=tag_name)
                 post.tags.add(tag)
-
-            post.save()
-            
-        
+            #saving the categories    
+            selected_categories = form.cleaned_data['Category']
+            post.Category.set(selected_categories)
+            print ("Post saved successfully")
             return redirect ('feed')
+        else:
+            print("unseccessfull")
+
     else:
-        print("unseccessfull")
         form = PostForm()
     return render(request,"BlogApp/create_post.html", {"form": form})
 

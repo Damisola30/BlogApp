@@ -52,7 +52,6 @@
           <form  method="post" id="stripe-login">
             {% load widget_tweaks %}
             {% csrf_token %}
-
             <div class="tweet-box">
                 <a href="{% url 'feed' %}"><i class="fa-solid fa-xmark"></i></a>
                 <!-- Hidden div for styling hashtags -->
@@ -63,8 +62,11 @@
                     <div class="category-bar">
                       {% for checkbox in form.Category %}
                           <label class="category-btn">
-                              {{ checkbox.tag }}  <!-- This renders the checkbox -->
-                              {{ checkbox.choice_label }}  <!-- This renders the category name -->
+                              <input type="checkbox" 
+                                     name="{{ checkbox.name }}" 
+                                     value="{{ checkbox.choice_value }}" 
+                                     {% if checkbox.is_checked %}checked{% endif %}>
+                              <span>{{ checkbox.choice_label }}</span>  <!-- Render category name inside button -->
                           </label>
                       {% endfor %}
                   </div>

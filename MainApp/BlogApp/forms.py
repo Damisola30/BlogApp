@@ -6,12 +6,10 @@ from .models import Comment, Post, Tag, Category
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    Dp = forms.ImageField(required= True)
-
-
+    
     class Meta :
         model = User 
-        fields = ["username", "email","Dp", "password1", "password2"]
+        fields = ["username", "email", "password1", "password2"]
 
 class PostForm(forms.ModelForm):
 

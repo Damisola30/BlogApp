@@ -3,12 +3,16 @@
 <div class="feed-page">
     <div class="category-container">
         <div class="category-bar">
-            {% for categories in categories %}
-            <button type="button" class="btn btn-light">
-                <span class="badge ">{{categories.name}}</span>
-            </button>
-            {% endfor %} 
-        </div>  
+            {% for Category in categories %}
+                <label class="category-btn">
+                    <input type="checkbox" 
+                           name="{{ Category.name }}" 
+                           value="{{ checkbox.choice_value }}" 
+                            {% if checkbox.is_checked %}checked{% endif %}>
+                    <span>{{ Category.name }}</span>  <!-- Render category name inside button -->
+                </label>
+            {% endfor %}
+        </div> 
     </div>
 
     <div class="feed-container">
@@ -16,7 +20,7 @@
         {% for post in post %}
             <div class="card ">
                 <div class="card-header">
-                    <img src="{{post.Dp.url}}" class="profile-pic" alt="...">
+                    <!-- <img src="{{user.Dp.url}}" class="profile-pic" alt="..."> -->
                     {{post.author.username}}
                 </div>
                 <div class="card-body">
