@@ -3,8 +3,6 @@
 <title>Stackfindover: Sign in</title>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'BlogApp/css/create_post.css' %}">
-
-
 <div class="login-root">
   <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
     <div class="loginbackground box-background--white padding-top--64">
@@ -39,10 +37,14 @@
         </div>
       </div>
     </div>
+
+    {% include "BlogApp/messages.html"%}
     <div class="box-root padding-top--24 flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+      
       <div class="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
-        <h1><a href="http://blog.stackfindover.com/" rel="dofollow">(logo)  </a></h1>
+        <a href="http://blog.stackfindover.com/" rel="dofollow"><img src="{% static 'BlogApp/images/PlainLogo.png' %}" alt="">  </a>
       </div>
+      
       <div class="formbg-outer">
         <div class="formbg">
             <!-- {% if form.description.errors %}
@@ -55,31 +57,34 @@
             <div class="tweet-box">
                 <a href="{% url 'feed' %}"><i class="fa-solid fa-xmark"></i></a>
                 <!-- Hidden div for styling hashtags -->
-                    <div class="styled-text" id="styledText"></div>
-                    {{form.description|attr:"class:tweet-input"}}
-                   
-                    <hr>
-                    <div class="category-bar">
-                      {% for checkbox in form.Category %}
-                          <label class="category-btn">
-                              <input type="checkbox" 
-                                     name="{{ checkbox.name }}" 
-                                     value="{{ checkbox.choice_value }}" 
-                                     {% if checkbox.is_checked %}checked{% endif %}>
-                              <span>{{ checkbox.choice_label }}</span>  <!-- Render category name inside button -->
-                          </label>
-                      {% endfor %}
+                <div class="styled-text" id="styledText"></div>
+                {{form.description|attr:"class:tweet-input"}}
+                {% if form.description.errors %}
+                  <div class="error">
+                      {{ form.description.errors }}
                   </div>
-                    <div class="tweet-footer">
-                        <div class="counter">
-                            <span id="charCount">0</span>/280
-                        </div>
-                        
+                {% endif %}
 
-                        <button type="submit" id="tweetButton" disabled>Post</button>
-                    </div>
+                <hr>
+                <div class="category-bar">
+                  {% for checkbox in form.Category %}
+                      <label class="category-btn">
+                          <input type="checkbox" 
+                                  name="{{ checkbox.name }}" 
+                                  value="{{ checkbox.choice_value }}" 
+                                  {% if checkbox.is_checked %}checked{% endif %}>
+                          <span>{{ checkbox.choice_label }}</span>  <!-- Render category name inside button -->
+                      </label>
+                  {% endfor %}
                 </div>
-            </form>
+                <div class="tweet-footer">
+                  <div class="counter">
+                      <span id="charCount">0</span>/280
+                  </div>
+                  <button type="submit" id="tweetButton" disabled>Post</button>
+                </div>
+            </div>
+          </form>
         </div>
         <div class="footer-link padding-top--24">
           <span>Don't have an account? <a href="">Sign up</a></span>
