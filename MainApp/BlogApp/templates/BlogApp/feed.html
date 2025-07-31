@@ -1,29 +1,17 @@
 {% extends "BlogApp/base.html"%}
-{% if messages %}
-    <div class="container "style="margin-top:100px;">
-      
-          {% for message in messages %}
-              <div class="alert alert-{{ message.tags }} text-center alert-dismissible fade show" role="alert">
-                  {{ message }}
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-          {% endfor %}
-      
-    </div>
-    {% endif %}
 {% block content %}
+{% include "BlogApp/messages.html"%}
 
 <div class="feed-page">
     <div class="category-container">
         <div class="category-bar">
             {% for Category in categories %}
-                <label class="category-btn">
-                    <input type="checkbox" 
-                           name="{{ Category.name }}" 
-                           value="{{ checkbox.choice_value }}" 
-                            {% if checkbox.is_checked %}checked{% endif %}>
-                    <span>{{ Category.name }}</span>  <!-- Render category name inside button -->
-                </label>
+            <input type="checkbox"class="category-btn" id="CategoryName" value="{{ Category.name }}" name="{{ Category.name }}" id="">
+            
+                <!-- <label class="category-btn" id="CategoryName">
+                    
+                    <span>{{ Category.name }}</span>  
+                </label> -->
             {% endfor %}
         </div> 
     </div>
@@ -31,14 +19,20 @@
     <div class="feed-container">
         <h3>Feed </h3>
         {% for post in post %}
-            <div class="card ">
+            <div class="card " id="postcontainer">
                 <div class="card-header">
-                    <!-- <img src="{{user.Dp.url}}" class="profile-pic" alt="..."> -->
+                    
                     {{post.author.username}}
                 </div>
                 <div class="card-body">
-                <!-- <h5 class="card-title">Primary card title</h5> -->
-                <p class="card-text">{{post.description}}</p>
+                    <p class="card-text">{{post.description}}</p>
+                    {% if post.Category.all %}
+                        {% for category in post.Category.all %}
+                            <p >{{ category.name }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p></p>
+                    {% endif %}
                 </div>
                 <div class="card-footer">
                     <p>updated_at</p>{{post.updated_at}}
@@ -47,4 +41,42 @@
         {% endfor %}
     </div>
 </div>
+<script>
+    CategoryName = document.getElementById("CategoryName")
+
+    function updatepost(post){
+        const postcontainer = get.getElementById("postcontainer")
+        postcontainer.InnerHTML = '';
+
+        posts.forEach(post => {
+            postcontainer.InnerHTML = `
+            <div class="card-header">
+                    ${post.author}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">${post.description}</p>
+                    <p> ${ category.name }</p>
+                </div>
+                <div class="card-footer">
+                    <p>updated_at</p>${post.updated_at}
+                </div>
+                `
+        });
+
+    }
+    function CategoryPostFeed(){
+        fetch('categorypost/', {
+            method :'POST',
+            headers :{
+                'Content-type':'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body : JSON.stringify({Category:CategoryName})
+        })
+        .then( response => response.json())
+        .then(data =>{
+            updatepost(data.post);
+        })
+    }
+</script>
 {% endblock%}

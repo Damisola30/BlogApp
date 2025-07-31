@@ -312,41 +312,19 @@ textarea::placeholder {
 }
 
 .alert {
-  padding: 1rem !important;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.375rem !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-}
-
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-}
-
-.alert-warning {
-  color: #856404;
-  background-color: #fff3cd;
-  border-color: #ffeeba;
-}
-
-.alert-info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
-}
-
-.alert-dismissible .btn-close {
-  position: absolute;
-  top: 0.25rem;
-  right: 0.5rem;
+  position: fixed;         /* Fixes the alert at a specific position on the page */
+  top: 0;                  /* Positions the alert at the very top of the page */
+  left: 50%;               /* Centers the alert horizontally */
+  transform: translateX(-50%); /* Adjusts for center alignment */
+  width: 100%;             /* Makes the alert span the full width of the page */
+  max-width: 500px;        /* Sets a maximum width to prevent it from getting too wide */
+  z-index: 9999;           /* Ensures the alert overlays other elements */
+  background-color: #f8d7da; /* Background color for a typical alert (light red) */
+  color: #721c24;          /* Text color */
+  padding: 15px;           /* Padding inside the alert */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for emphasis */
+  border-radius: 5px;      /* Rounds the corners slightly */
+  text-align: center;      /* Centers the text inside the alert */
 }
 
 

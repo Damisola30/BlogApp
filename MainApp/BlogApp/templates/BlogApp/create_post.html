@@ -3,7 +3,7 @@
 <title>Stackfindover: Sign in</title>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'BlogApp/css/create_post.css' %}">
-<div class="login-root">
+<div class="login-root" style="margin-top: 10px;">
   <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
     <div class="loginbackground box-background--white padding-top--64">
       <div class="loginbackground-gridContainer">
@@ -59,20 +59,13 @@
                 <!-- Hidden div for styling hashtags -->
                 <div class="styled-text" id="styledText"></div>
                 {{form.description|attr:"class:tweet-input"}}
-                {% if form.description.errors %}
-                  <div class="error">
-                      {{ form.description.errors }}
-                  </div>
-                {% endif %}
+                
 
                 <hr>
                 <div class="category-bar">
                   {% for checkbox in form.Category %}
                       <label class="category-btn">
-                          <input type="checkbox" 
-                                  name="{{ checkbox.name }}" 
-                                  value="{{ checkbox.choice_value }}" 
-                                  {% if checkbox.is_checked %}checked{% endif %}>
+                          {{checkbox.tag}}
                           <span>{{ checkbox.choice_label }}</span>  <!-- Render category name inside button -->
                       </label>
                   {% endfor %}
@@ -81,7 +74,16 @@
                   <div class="counter">
                       <span id="charCount">0</span>/280
                   </div>
-                  <button type="submit" id="tweetButton" disabled>Post</button>
+                  <button type="submit" id="tweetButton" >Post</button>
+                  {% if form.errors %}
+                  <div class="error">
+                    <ul>
+                      {% for field, errors in form.errors.items %}
+                        <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+              {% endif %}
                 </div>
             </div>
           </form>

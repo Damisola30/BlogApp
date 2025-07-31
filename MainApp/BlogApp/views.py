@@ -40,14 +40,7 @@ def user_login(request):
                 messages.success(request, f'welcome {username}, you have successfully registered! You can now login')
                 form.save()
                  
-           
-               
-
-   
-    
     return render(request, 'registration/login.html', {'form': form})
-
-    
 
 @login_required (login_url ='login')
 def feed(request):
@@ -62,7 +55,6 @@ def feed(request):
 def create_post(request):
     form = PostForm()
     if request.method == "POST":
-        
         form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
@@ -78,7 +70,7 @@ def create_post(request):
             messages.success(request, "Post created successfully")
             return redirect ('feed')
         else:
-            messages.error (request,"Post creation was unsuccessful. Please check the form.")
+            messages.error(request,"Post creation was unsuccessful. Please check the form.")
 
 
     return render(request,"BlogApp/create_post.html", {"form": form})
