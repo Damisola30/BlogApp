@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <div class="message-container">
+        {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible text-center fade show text-center" role="alert" >
+                    {{ message }}
+                    <button type="button" class="btn-close " style="background-color: transparent; " data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% else %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible text-center fade show text-center" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close alert-success" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

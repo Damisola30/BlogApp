@@ -9,9 +9,26 @@
      <!-- font awesome icons -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- css stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="{% static 'BlogApp/css/Login.css' %}">
 </head>
 <body>
+    {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="alert alert-danger alert-dismissible text-center fade show text-center" role="alert" >
+                    {{ message }}
+                    <button type="button" class="btn-close " style="background-color: transparent; " data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% else %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible text-center fade show text-center" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close alert-success" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
     {% load widget_tweaks %}
     <div class="container" id="container">
         <div class="form-container sign-up-container">
@@ -25,27 +42,39 @@
                 </div>
                 {{ form.non_field_errors }}
 
-                {% if messages %}
-                    {% for msg in messages %}
-                        <div class="error" style="color: orange;">{{msg}}</div>
-                    {% endfor%}
-                {% endif %}
+                
                 <!-- <span>or use your email for registration</span> -->
                 <div class="infield">
                     {{ form.username|attr:"placeholder:Username" }}                    
-                    {{ form.username.errors }}
+                    {% if form.username.errors %}
+                        <div class="text-danger">
+                            {{ form.username.errors.as_text }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="infield">
                     {{ form.email|attr:"placeholder:Email" }}                   
-                    {{ form.email.errors }}
+                    {% if form.email.errors %}
+                        <div class="text-danger">
+                            {{ form.email.errors.as_text }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="infield">
                     {{ form.password1|attr:"placeholder:Password"}}
-                    {{ form.password1.errors }}
+                    {% if form.password1.errors %}
+                        <div class="text-danger">
+                            {{ form.password1.errors.as_text }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="infield">
                     {{ form.password2|attr:"placeholder:Confirm Password" }}
-                    {{ form.password2.errors }}
+                    {% if form.password2.errors %}
+                        <div class="text-danger">
+                            {{ form.password2.errors.as_text }}
+                        </div>
+                    {% endif %}
                 </div>
                 <button type="submit" name = "form_type" value="Register" >Register</button>
             </form>
@@ -60,12 +89,21 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <p style="color: orange;">{{error_message}}</p>
                 <div class="infield">
                     <input type="username" placeholder="username" name="username">
+                    {% if form.username.errors %}
+                        <div class="text-danger">
+                            {{ form.username.errors.as_text }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="infield">
                     <input type="password" placeholder="Password" name="password">
+                    {% if form.password.errors %}
+                        <div class="text-danger">
+                            {{ form.password.errors.as_text }}
+                        </div>
+                    {% endif %}
                 </div>
                 <a href="#" class="forgot">Forgot your password?</a>
                 <button type="submit" name = "form_type" value="login">Sign In</button>
@@ -96,7 +134,23 @@
     
     
     <!-- js code -->
-    <script src="{% static 'BlogApp/js/Login.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
+    <script src="{% static 'BlogApp/js/Login.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all alert elements
+            const alerts = document.querySelectorAll('.alert');
+    
+            alerts.forEach(alert => {
+                // Set a timeout to fade out the alert after 4 seconds
+                setTimeout(() => {
+                    // Use Bootstrap's alert class to hide it
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 4000);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
   h1 {
       letter-spacing: -1px;
   }
+ 
   a {
     color: #4BA896;
     text-decoration: unset;
@@ -44,24 +45,20 @@
     align-items: center;
     justify-content: center;
   }
-  .box-root {
-      box-sizing: border-box;
-  }
+  
   .flex-direction--column {
       -ms-flex-direction: column;
       flex-direction: column;
   }
   .loginbackground-gridContainer {
-      display: -ms-grid;
-      display: grid;
-      -ms-grid-columns: [start] 1fr [left-gutter] (86.6px)[16] [left-gutter] 1fr [end];
-      grid-template-columns: [start] 1fr [left-gutter] repeat(16,86.6px) [left-gutter] 1fr [end];
-      -ms-grid-rows: [top] 1fr [top-gutter] (64px)[8] [bottom-gutter] 1fr [bottom];
-      grid-template-rows: [top] 1fr [top-gutter] repeat(8,64px) [bottom-gutter] 1fr [bottom];
-      justify-content: center;
-      margin: 0 -2%;
-      transform: rotate(-12deg) skew(-12deg);
-  }
+    display: grid;
+    grid-template-columns: 1fr [left-gutter] repeat(16, 86.6px) [right-gutter] 1fr;
+    grid-template-rows: 1fr [top-gutter] repeat(8, 64px) [bottom-gutter] 1fr;
+    justify-content: center;
+    margin: 0 -2%; /* Adjust based on your layout needs */
+    transform: rotate(-12deg) skew(-12deg);
+}
+
   .box-divider--light-all-2 {
       box-shadow: inset 0 0 0 2px #e3e8ee;
   }
@@ -308,6 +305,28 @@ textarea::placeholder {
     align-items: center;
     height: 100vh;
 }
+.message-container {
+  position: relative;
+  z-index: 1000;
+  margin: 1rem auto;
+}
+
+.alert {
+  position: fixed;         /* Fixes the alert at a specific position on the page */
+  top: 0;                  /* Positions the alert at the very top of the page */
+  left: 50%;               /* Centers the alert horizontally */
+  transform: translateX(-50%); /* Adjusts for center alignment */
+  width: 100%;             /* Makes the alert span the full width of the page */
+  max-width: 500px;        /* Sets a maximum width to prevent it from getting too wide */
+  z-index: 9999;           /* Ensures the alert overlays other elements */
+  background-color: #f8d7da; /* Background color for a typical alert (light red) */
+  color: #721c24;          /* Text color */
+  padding: 15px;           /* Padding inside the alert */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for emphasis */
+  border-radius: 5px;      /* Rounds the corners slightly */
+  text-align: center;      /* Centers the text inside the alert */
+}
+
 
 button {
   background-color: #1d9bf0;
